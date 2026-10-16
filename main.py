@@ -1,6 +1,7 @@
 import psycopg
 import os
 from dotenv import load_dotenv
+from psycopg.rows import dict_row
 
 load_dotenv()
 
@@ -13,15 +14,15 @@ conexao = psycopg.connect(
 
 	)
 
-cursor = conexao.cursor()
+cursor = conexao.cursor(row_factory=dict_row)
 print(conexao.closed)
 cursor.execute("SELECT * FROM tb_produtos")
 produtos = cursor.fetchall()
 for produto in produtos:
-	print(f"Produto: {produto[1]}")
-	print(f"Valor: {produto[2]}")
-	print(f"Estoque: {produto[3]}")
-	print("="*10)
+    print(f"Produto: {produto['nome']}")
+    print(f"Valor: R$ {produto['preco']}")
+    print(f"Estoque: {produto['estoque']}")
+    print("=" * 10)
 
 cursor.close()
 conexao.close()
