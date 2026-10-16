@@ -24,5 +24,24 @@ for produto in produtos:
     print(f"Estoque: {produto['estoque']}")
     print("=" * 10)
 
+
+
+def cadastrar_produto(nome: str, preco: float, estoque: int):
+    # Sua implementação
+	cursor.execute(
+    "INSERT INTO tb_produtos (nome, preco, estoque) VALUES (%s, %s, %s)", 
+	(nome, preco, estoque)
+	)
+	conexao.commit()
+	return True
+
+
+
+cadastrar_mesa = cadastrar_produto("Mesa", 349.90, 2)
+if cadastrar_mesa:
+	print("Cadastrado!")
+else:
+	print("Erro ao cadastrar")
+
 cursor.close()
 conexao.close()
