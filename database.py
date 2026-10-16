@@ -15,7 +15,5 @@ def conectar():
         password = os.getenv("DB_PASSWORD")
         )
     return conexao
-#cria cursos que vai fazer a conexao com bd e transformar as colunas em dic
-cursor = conexao.cursor(row_factory=dict_row)
 
 

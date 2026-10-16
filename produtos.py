@@ -1,3 +1,5 @@
+from psycopg.rows import dict_row
+
 def cadastrar_produto(nome: str, preco: float, estoque: int):
     # Sua implementação
 	cursor.execute(
@@ -7,7 +9,8 @@ def cadastrar_produto(nome: str, preco: float, estoque: int):
 	conexao.commit()
 	return True
 
-def listar_produtos():
+def listar_produtos(conexao):
+	cursor = conexao.cursor(row_factory=dict_row)
 	cursor.execute(
 		"SELECT * FROM tb_produtos"
 	)
